@@ -3,6 +3,7 @@ const mailSender = require("../utils/mailSender");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 
+// generate link and send mail
 exports.resetPasswordToken = async (req, res) => {
 	try {
 		const email = req.body.email;
@@ -13,13 +14,14 @@ exports.resetPasswordToken = async (req, res) => {
 				message: `This Email: ${email} is not Registered With Us Enter a Valid Email `,
 			});
 		}
+		// generate token
 		const token = crypto.randomBytes(20).toString("hex");
 
 		const updatedDetails = await User.findOneAndUpdate(
 			{ email: email },
 			{
 				token: token,
-				resetPasswordExpires: Date.now() + 3600000,
+				resetPasswordExpires: Date.now() + 3600000, // 5 min
 			},
 			{ new: true }
 		);
