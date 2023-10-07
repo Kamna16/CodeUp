@@ -22,10 +22,10 @@ exports.createSection = async (req, res) => {
 			courseId,
 			{
 				$push: {
-					courseContent: newSection._id,
+					courseContent: newSection._id, // push new sections object id
 				},
 			},
-			{ new: true }
+			{ new: true } // return updated document
 		)
 			.populate({
 				path: "courseContent",
@@ -33,7 +33,7 @@ exports.createSection = async (req, res) => {
 					path: "subSection",
 				},
 			})
-			.exec();
+			.exec(); // execute entire chain of operations
 
 		// Return the updated course object in the response
 		res.status(200).json({
@@ -55,14 +55,24 @@ exports.createSection = async (req, res) => {
 exports.updateSection = async (req, res) => {
 	try {
 		const { sectionName, sectionId } = req.body;
+		// validation
+		if(!sectionName || !sectionId)
+		{
+			res.status(400).json({
+				success:false,
+				message: "Please enter all the fields"
+			})
+		}
+		// update the section
 		const section = await Section.findByIdAndUpdate(
-			sectionId,
-			{ sectionName },
+			sectionId, // find by this
+			{ sectionName }, // change the name
 			{ new: true }
 		);
 		res.status(200).json({
 			success: true,
-			message: section,
+			message: "Section Updated Successfully",
+			section,
 		});
 	} catch (error) {
 		console.error("Error updating section:", error);
@@ -73,17 +83,18 @@ exports.updateSection = async (req, res) => {
 	}
 };
 
-// DELETE a section
+// DELETE a section 
 exports.deleteSection = async (req, res) => {
 	try {
-		//HW -> req.params -> test
+		// assuming id is sent in params
 		const { sectionId } = req.params;
 		await Section.findByIdAndDelete(sectionId);
-		//HW -> Course ko bhi update karo
 		res.status(200).json({
 			success: true,
 			message: "Section deleted",
 		});
+
+		// remaining: delete from secions id from course schema
 	} catch (error) {
 		console.error("Error deleting section:", error);
 		res.status(500).json({

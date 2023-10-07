@@ -53,12 +53,12 @@ exports.createCourse = async (req, res) => {
       });
     }
 
-    // Check if the tag given is valid
+    // Check if the category given is valid
     const categoryDetails = await Category.findById(category);
     if (!categoryDetails) {
       return res.status(404).json({
         success: false,
-        message: "Category Details Not Found",
+        message: "Category Does not exist",
       });
     }
     // Upload the Thumbnail to Cloudinary
@@ -67,6 +67,7 @@ exports.createCourse = async (req, res) => {
       process.env.FOLDER_NAME
     );
     console.log(thumbnailImage);
+    
     // Create a new course with the given details
     const newCourse = await Course.create({
       courseName,
