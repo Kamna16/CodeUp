@@ -1,2 +1,2 @@
 # CodeUp
- This is an Edtech Platform
+ This is a fullstack Edtech Platform built using MERNSTACK.
