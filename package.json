@@ -5,7 +5,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
-    "concurrently": "^8.0.1",
+    "concurrently": "^8.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
@@ -23,11 +23,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thepranaygupta/react-tailwind-css-starter-pack.git"
+    "url": "git+https://github.com/Kamna16/CodeUp"
   },
-  "author": "Pranay Gupta",
+  "author": "Kamna Bhdoriya",
   "bugs": {
-    "url": "https://github.com/thepranaygupta/react-tailwind-css-starter-pack/issues"
+    "url": ""
   },
   "scripts": {
     "start": "react-scripts start",

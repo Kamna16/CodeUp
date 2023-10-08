@@ -7,10 +7,11 @@ const { default: mongoose } = require("mongoose");
 
 //capture the payment and initiate the Razorpay order
 exports.capturePayment = async (req, res) => {
+
     //get courseId and UserID
     const {course_id} = req.body;
     const userId = req.user.id;
-    //validation
+
     //valid courseID
     if(!course_id) {
         return res.json({
@@ -29,7 +30,7 @@ exports.capturePayment = async (req, res) => {
             });
         }
 
-        //user already pay for the same course
+        //user already paid for the same course
         const uid = new mongoose.Types.ObjectId(userId);
         if(course.studentsEnrolled.includes(uid)) {
             return res.status(200).json({
@@ -46,14 +47,14 @@ exports.capturePayment = async (req, res) => {
         });
     }
     
-    //order create
+    // create order
     const amount = course.price;
     const currency = "INR";
 
     const options = {
         amount: amount * 100,
         currency,
-        receipt: Math.random(Date.now()).toString(),
+        receipt: Math.random(Date.now()).toString(), // random receipt number
         notes:{
             courseId: course_id,
             userId,
