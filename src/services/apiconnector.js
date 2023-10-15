@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const axiosInstance = axios.create({});
-
+// connecting to backend api
 
 export const apiConnector = (method, url, bodyData, headers, params) =>{
     return axiosInstance({
