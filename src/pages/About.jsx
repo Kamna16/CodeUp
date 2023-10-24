@@ -28,7 +28,6 @@ const About = () => {
             </div>
         </div>
       </section>
-
       {/* section 2 */}
 
       <section>
@@ -58,7 +57,7 @@ const About = () => {
                 </div>
             </div>
 
-            {/* vision and mission wala parent div */}
+            {/* vision and mission parent div */}
             <div className='flex'>
                 {/* left box */}
                 <div>
