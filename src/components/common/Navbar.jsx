@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-// import logo from "../../assets/Logo/Logo-Full-Light.png"
+// import logo from "../../assets/Logo/CodeUpLogo.png"
 import { Link, matchPath } from 'react-router-dom'
 import {NavbarLinks} from "../../data/navbar-links"
 import { useLocation } from 'react-router-dom'
@@ -59,7 +59,7 @@ const Navbar = () => {
       <div className='flex w-11/12 max-w-maxContent items-center justify-between'>
         {/* Image */}
       <Link to="/">
-        <img src={logo} width={160} height={42} loading='lazy'/>
+        {/* <img src={logo} width={160} height={42} loading='lazy' alt='logo'/> */}
       </Link>
 
       {/* Nav Links */}
@@ -122,7 +122,7 @@ const Navbar = () => {
         <div className='flex gap-x-4 items-center'>
 
             {
-                user && user?.accountType != "Instructor" && (
+                user && user?.accountType !== "Instructor" && (
                     <Link to="/dashboard/cart" className='relative'>
                         <AiOutlineShoppingCart />
                         {

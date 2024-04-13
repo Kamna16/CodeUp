@@ -53,7 +53,6 @@ const userSchema = new mongoose.Schema(
 		},
 		image: {
 			type: String,
-			required: true,
 		},
 		courseProgress: [
 			{
@@ -61,7 +60,6 @@ const userSchema = new mongoose.Schema(
 				ref: "courseProgress",
 			},
 		],
-
 	},
 	{ timestamps: true }
 );

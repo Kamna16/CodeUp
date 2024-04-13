@@ -175,7 +175,7 @@ exports.login = async (req, res) => {
 		// Return 500 Internal Server Error status code with error message
 		return res.status(500).json({
 			success: false,
-			message: `Login Failure Please Try Again`,
+			message: `Login Failed Please Try Again`,
 		});
 	}
 };
@@ -205,12 +205,12 @@ exports.sendotp = async (req, res) => {
 
 		// check if OTP is unique
 		const result = await OTP.findOne({ otp: otp });
-		console.log("OTP", otp);
-		console.log("Result", result);
 
 		while (result) {
 			otp = otpGenerator.generate(6, {
 				upperCaseAlphabets: false,
+				lowerCaseAlphabets: false,
+				specialChars: false,
 			});
 		}
 
@@ -218,6 +218,7 @@ exports.sendotp = async (req, res) => {
 		const otpBody = await OTP.create(otpPayload);
 
 		console.log("OTP Body", otpBody);
+		
 		res.status(200).json({
 			success: true,
 			message: `OTP Sent Successfully`,

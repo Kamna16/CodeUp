@@ -34,6 +34,7 @@ export function sendOtp(email, navigate) {
       toast.success("OTP Sent Successfully")
       navigate("/verify-email")
     } catch (error) {
+      console.error(error);
       console.log("SENDOTP API ERROR............", error)
       toast.error("Could Not Send OTP")
     }
@@ -108,7 +109,6 @@ export function login(email, password, navigate) {
       localStorage.setItem("token", JSON.stringify(response.data.token))
       navigate("/dashboard/my-profile")
 
-      
     } catch (error) {
       console.log("LOGIN API ERROR............", error)
       toast.error("Login Failed")

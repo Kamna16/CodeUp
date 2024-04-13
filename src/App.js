@@ -70,7 +70,7 @@ function App() {
           }
         />  
 
-        <Route path="/contact" element={<Contact/>} />
+        {/* <Route path="/contact" element={<Contact/>} /> */}
 
 
     </Routes>

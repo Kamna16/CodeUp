@@ -49,33 +49,63 @@ exports.categoryPageDetails = async (req, res) => {
   try {
     //get categoryId
     const { categoryId } = req.body;
+
     //get courses for specified categoryId
     const selectedCategory = await Category.findById(categoryId)
-      .populate("courses")
-      .exec();
+    .populate({
+      path: "courses",
+      match: { status: "Published" },
+      populate: "ratingAndReviews",
+    })
+    .exec();
     //validation
     if (!selectedCategory) {
       return res.status(404).json({
         success: false,
-        message: "Data Not Found",
+        message: "Category Not Found",
       });
     }
-    //get coursesfor different categories
-    const differentCategories = await Category.find({
+    if (selectedCategory.courses.length === 0) {
+      console.log("No courses found for the selected category.")
+      return res.status(404).json({
+        success: false,
+        message: "No courses found for the selected category.",
+      })
+    }
+    //get courses for different categories
+    const CategoriesExceptSelected = await Category.find({
       _id: { $ne: categoryId },
     })
-      .populate("courses")
-      .exec();
+      
+    let differentCategory = await Category.findOne(
+      CategoriesExceptSelected[getRandomInt(CategoriesExceptSelected.length)]
+        ._id
+    )
+      .populate({
+        path: "courses",
+        match: { status: "Published" },
+      })
+      .exec()
 
-    //get top 10 selling courses
-    //HW - write it on your own
+      // Get top-selling courses across all categories
+    const allCategories = await Category.find()
+    .populate({
+      path: "courses",
+      match: { status: "Published" },
+    })
+    .exec()
+  const allCourses = allCategories.flatMap((category) => category.courses)
+  const mostSellingCourses = allCourses
+    .sort((a, b) => b.sold - a.sold)
+    .slice(0, 10)
 
     //return response
     return res.status(200).json({
       success: true,
       data: {
         selectedCategory,
-        differentCategories,
+        differentCategory,
+        mostSellingCourses
       },
     });
   } catch (error) {
