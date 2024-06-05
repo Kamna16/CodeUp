@@ -3,7 +3,7 @@ import { FooterLink2 } from "../../data/footer-links";
 import { Link } from "react-router-dom";
 
 // Images
-// import Logo from "../../assets/Logo/CodeUpLogo.png";
+import Logo from "../../assets/Logo/CodeUpLogo.png";
 
 // Icons
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
@@ -22,8 +22,7 @@ const Resources = [
 const Plans = ["Paid memberships", "For students", "Business solutions"];
 const Community = ["Forums", "Chapters", "Events"];
 
-
-export default function Footer() {
+const Footer = () => {
   return (
     <div className="bg-richblack-800">
       <div className="flex lg:flex-row gap-8 items-center justify-between w-11/12 max-w-maxContent text-richblack-400 leading-6 mx-auto relative py-14">
@@ -31,7 +30,7 @@ export default function Footer() {
           {/* Section 1 */}
           <div className="lg:w-[50%] flex flex-wrap flex-row justify-between lg:border-r lg:border-richblack-700 pl-3 lg:pr-5 gap-3">
             <div className="w-[30%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
-              {/* <img src={Logo} alt="" className="object-contain" /> */}
+              <img src={Logo} alt="" className="object-contain" />
               <h1 className="text-richblack-50 font-semibold text-[16px]">
                 Company
               </h1>
@@ -173,9 +172,11 @@ export default function Footer() {
             })}
           </div>
 
-          <div className="text-center"> © 2023 CodeUp</div>
+          <div className="text-center">Made with ❤️ CodeUp © 2023 Kamna</div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Footer;

@@ -1,4 +1,5 @@
 import {combineReducers} from "@reduxjs/toolkit";
+//import slices
 import authReducer from "../slices/authSlice"
 import profileReducer from "../slices/profileSlice"
 import cartReducer from "../slices/cartSlice"

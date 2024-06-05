@@ -4,6 +4,7 @@ const Section = require("../models/Section")
 const SubSection = require("../models/SubSection")
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const { convertSecondsToDuration } = require("../utils/secToDuration")
 // Function to create a new course
 exports.createCourse = async (req, res) => {
   try {
@@ -18,7 +19,7 @@ exports.createCourse = async (req, res) => {
       tag: _tag,
       category,
       status,
-      instructions: _instructions,
+      // instructions: _instructions,
     } = req.body;
 
     // Get thumbnail image from request files
@@ -26,7 +27,7 @@ exports.createCourse = async (req, res) => {
 
     // Convert the tag and instructions from stringified Array to Array
     const tag = JSON.parse(_tag)
-    const instructions = JSON.parse(_instructions)
+    // const instructions = JSON.parse(_instructions)
 
     // Check if any of the required fields are missing
     if (
@@ -84,7 +85,7 @@ exports.createCourse = async (req, res) => {
       category: categoryDetails._id,
       thumbnail: thumbnailImage.secure_url,
       status: status,
-      instructions,
+      // instructions,
     });
 
     // Add the new course to the User Schema of the Instructor
@@ -230,7 +231,7 @@ exports.getCourseDetails = async (req, res) => {
     //get id
     const { courseId } = req.body;
     //find course details
-    const courseDetails = await Course.find({ _id: courseId })
+    const courseDetails = await Course.findOne({ _id: courseId })
       .populate({
         path: "instructor",
         populate: {
@@ -238,11 +239,11 @@ exports.getCourseDetails = async (req, res) => {
         },
       })
       .populate("category")
-      .populate("ratingAndreviews")
+      // .populate("ratingAndreviews")
       .populate({
         path: "courseContent",
         populate: {
-          path: "SubSection",
+          path: "subSection",
           select: "-videoUrl",
         },
       })
@@ -257,6 +258,7 @@ exports.getCourseDetails = async (req, res) => {
     }
 
     let totalDurationInSeconds = 0
+    // console.log("detailssssss:",courseDetails)
     courseDetails.courseContent.forEach((content) => {
       content.subSection.forEach((subSection) => {
         const timeDurationInSeconds = parseInt(subSection.timeDuration)
