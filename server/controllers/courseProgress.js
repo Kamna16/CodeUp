@@ -74,7 +74,6 @@ exports.getProgressPercentage = async (req, res) => {
         .status(400)
         .json({ error: "Can not find Course Progress with these IDs." })
     }
-    console.log(courseProgress, userId)
     let lectures = 0
     courseProgress.courseID.courseContent?.forEach((sec) => {
       lectures += sec.subSection.length || 0

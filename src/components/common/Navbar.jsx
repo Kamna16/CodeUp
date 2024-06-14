@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-// import logo from "../../assets/Logo/CodeUpLogo.png"
+import logo from "../../assets/Logo/Logo.png"
 import { Link, matchPath } from "react-router-dom";
 import { NavbarLinks } from "../../data/navbar-links";
 import { useLocation } from "react-router-dom";
@@ -12,19 +12,18 @@ import { useState } from "react";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { ACCOUNT_TYPE } from "../../utils/constants"
 
-const subLinks = [
-  {
-    title: "python",
-    link: "/catalog/python",
-  },
-  {
-    title: "web dev",
-    link: "/catalog/web-development",
-  },
-];
+// const subLinks = [
+//   {
+//     title: "python",
+//     link: "/catalog/python",
+//   },
+//   {
+//     title: "web dev",
+//     link: "/catalog/web-development",
+//   },
+// ];
 
 const Navbar = () => {
-  // console.log("Printing base url: ", process.env.REACT_APP_BASE_URL);
   // get from slices
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
@@ -39,8 +38,9 @@ const Navbar = () => {
       setLoading(true)
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
-        console.log("categories ", res);
+        console.log("CATEGORIES DATA FETCHED : ",res);
         setSubLinks(res.data.data)
+        console.log("Sublinks: ",SubLinks);
       } catch (error) {
         console.log("Could not fetch Categories.", error)
       }
@@ -57,7 +57,7 @@ const Navbar = () => {
       <div className="flex w-11/12 max-w-maxContent items-center justify-between">
         {/* Image */}
         <Link to="/">
-          {/* <img src={logo} width={160} height={42} loading='lazy' alt='logo'/> */}
+          <img className="mt-4" src={logo} width={180} height={48} loading='lazy' alt='logo'/>
         </Link>
 
         {/* Nav Links */}

@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast"
 
-import rzpLogo from "../../assets/Logo/CodeUpLogo.png"
+import rzpLogo from "../../assets/Logo/Logo.png"
 import { resetCart } from "../../slices/cartSlice"
 import { setPaymentLoading } from "../../slices/courseSlice"
 import { apiConnector } from "../apiconnector"
@@ -62,7 +62,6 @@ export async function BuyCourse(
     if (!orderResponse.data.success) {
       throw new Error(orderResponse.data.message)
     }
-    console.log("PAYMENT RESPONSE FROM BACKEND............", orderResponse.data)
 
     // Opening the Razorpay SDK
     const options = {

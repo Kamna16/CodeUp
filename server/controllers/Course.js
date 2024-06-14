@@ -19,7 +19,7 @@ exports.createCourse = async (req, res) => {
       tag: _tag,
       category,
       status,
-      // instructions: _instructions,
+      instructions: _instructions,
     } = req.body;
 
     // Get thumbnail image from request files
@@ -27,7 +27,7 @@ exports.createCourse = async (req, res) => {
 
     // Convert the tag and instructions from stringified Array to Array
     const tag = JSON.parse(_tag)
-    // const instructions = JSON.parse(_instructions)
+    const instructions = JSON.parse(_instructions)
 
     // Check if any of the required fields are missing
     if (
@@ -37,7 +37,8 @@ exports.createCourse = async (req, res) => {
       !price ||
       !tag ||
       !thumbnail ||
-      !category
+      !category ||
+      !instructions.length
     ) {
       return res.status(400).json({
         success: false,
@@ -72,7 +73,6 @@ exports.createCourse = async (req, res) => {
       thumbnail,
       process.env.FOLDER_NAME
     );
-    console.log(thumbnailImage);
     
     // Create a new course with the given details
     const newCourse = await Course.create({
@@ -85,7 +85,7 @@ exports.createCourse = async (req, res) => {
       category: categoryDetails._id,
       thumbnail: thumbnailImage.secure_url,
       status: status,
-      // instructions,
+      instructions,
     });
 
     // Add the new course to the User Schema of the Instructor
@@ -105,7 +105,7 @@ exports.createCourse = async (req, res) => {
       { _id: category },
       {
         $push: {
-          course: newCourse._id,
+          courses: newCourse._id,
         },
       },
       { new: true }
@@ -139,7 +139,6 @@ exports.editCourse = async (req, res) => {
 
     // If Thumbnail Image is found, update it
     if (req.files) {
-      console.log("thumbnail update")
       const thumbnail = req.files.thumbnailImage
       const thumbnailImage = await uploadImageToCloudinary(
         thumbnail,
@@ -258,7 +257,6 @@ exports.getCourseDetails = async (req, res) => {
     }
 
     let totalDurationInSeconds = 0
-    // console.log("detailssssss:",courseDetails)
     courseDetails.courseContent.forEach((content) => {
       content.subSection.forEach((subSection) => {
         const timeDurationInSeconds = parseInt(subSection.timeDuration)
@@ -313,8 +311,6 @@ exports.getFullCourseDetails = async (req, res) => {
       courseID: courseId,
       userId: userId,
     })
-
-    console.log("courseProgressCount : ", courseProgressCount)
 
     if (!courseDetails) {
       return res.status(400).json({
@@ -395,7 +391,7 @@ exports.deleteCourse = async (req, res) => {
     }
 
     // Unenroll students from the course
-    const studentsEnrolled = course.studentsEnroled
+    const studentsEnrolled = course.studentsEnrolled
     for (const studentId of studentsEnrolled) {
       await User.findByIdAndUpdate(studentId, {
         $pull: { courses: courseId },

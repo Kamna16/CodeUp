@@ -25,7 +25,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
   // to keep track of confirmation modal
   const [confirmationModal, setConfirmationModal] = useState(null)
 
-  const handleDeleleSection = async (sectionId) => {
+  const handleDeleteSection = async (sectionId) => {
     const result = await deleteSection({
       sectionId,
       courseId: course._id,
@@ -85,7 +85,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
                       text2: "All the lectures in this section will be deleted",
                       btn1Text: "Delete",
                       btn2Text: "Cancel",
-                      btn1Handler: () => handleDeleleSection(section._id),
+                      btn1Handler: () => handleDeleteSection(section._id),
                       btn2Handler: () => setConfirmationModal(null),
                     })
                   }

@@ -81,6 +81,7 @@ export default function CourseInformationForm() {
   //   handle next button click
   const onSubmit = async (data) => {
     // console.log(data)
+    console.log("onsubmit clicked");
 
     if (editCourse) {
       // const currentValues = getValues()

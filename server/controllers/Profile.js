@@ -59,7 +59,7 @@ exports.updateProfile = async (req, res) => {
   exports.deleteAccount = async (req, res) => {
 	try {
 	  const id = req.user.id
-	  console.log(id)
+
 	  const user = await User.findById({ _id: id })
 	  if (!user) {
 		return res.status(404).json({
@@ -99,7 +99,7 @@ exports.updateProfile = async (req, res) => {
 	  const userDetails = await User.findById(id)
 		.populate("additionalDetails")
 		.exec()
-	  console.log(userDetails)
+
 	  res.status(200).json({
 		success: true,
 		message: "User Data fetched successfully",
@@ -123,7 +123,7 @@ exports.updateProfile = async (req, res) => {
 		1000,
 		1000
 	  )
-	  console.log(image)
+
 	  const updatedProfile = await User.findByIdAndUpdate(
 		{ _id: userId },
 		{ image: image.secure_url },
