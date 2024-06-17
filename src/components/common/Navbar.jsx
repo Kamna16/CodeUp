@@ -127,7 +127,7 @@ const Navbar = () => {
         <div className="flex gap-x-4 items-center">
           {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
             <Link to="/dashboard/cart" className="relative">
-              <AiOutlineShoppingCart />
+              <AiOutlineShoppingCart color="white" size={"2em"}/>
               {totalItems > 0 && <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">{totalItems}</span>}
             </Link>
           )}

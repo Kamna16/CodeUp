@@ -22,6 +22,8 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  console.log("USER : ",user);
+  console.log("COURSE : ",course);
   const {
     thumbnail: ThumbnailImage,
     price: CurrentPrice,
@@ -51,7 +53,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
       btn2Handler: () => setConfirmationModal(null),
     })
   }
-
+  
   return (
     <>
       <div
@@ -70,19 +72,19 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
           </div>
           <div className="flex flex-col gap-4">
             <button
-              className="yellowButton"
+              className="bg-yellow-100 text-richblack-800 rounded h-10"
               onClick={
-                user && course?.studentsEnroled.includes(user?._id)
+                user && course?.studentsEnrolled.includes(user?._id)
                   ? () => navigate("/dashboard/enrolled-courses")
                   : handleBuyCourse
               }
             >
-              {user && course?.studentsEnroled.includes(user?._id)
+              {user && course?.studentsEnrolled.includes(user?._id)
                 ? "Go To Course"
                 : "Buy Now"}
             </button>
-            {(!user || !course?.studentsEnroled.includes(user?._id)) && (
-              <button onClick={handleAddToCart} className="blackButton">
+            {(!user || !course?.studentsEnrolled.includes(user?._id)) && (
+              <button onClick={handleAddToCart} className="bg-richblack-900 rounded h-10">
                 Add to Cart
               </button>
             )}

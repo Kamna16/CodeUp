@@ -1,24 +1,31 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react"
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import "swiper/css"
-import "swiper/css/free-mode"
-import "swiper/css/pagination"
-import { FreeMode, Pagination } from "swiper/modules"
+import "swiper/css";
+import "swiper/css/navigation";
+import { Autoplay, Navigation } from "swiper/modules";
 
-import Course_Card from "./Course_Card"
+import Course_Card from "./Course_Card";
 
 function Course_Slider({ Courses }) {
   return (
     <>
       {Courses?.length ? (
         <Swiper
-          slidesPerView={1}
-          spaceBetween={25}
+          spaceBetween={30}
           loop={true}
-          modules={[FreeMode, Pagination]}
+          centeredSlides={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          // navigation={true}
+          modules={[Autoplay, Navigation]}
           breakpoints={{
             1024: {
               slidesPerView: 3,
@@ -36,7 +43,7 @@ function Course_Slider({ Courses }) {
         <p className="text-xl text-richblack-5">No Course Found</p>
       )}
     </>
-  )
+  );
 }
 
-export default Course_Slider
+export default Course_Slider;

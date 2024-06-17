@@ -33,10 +33,10 @@ function CourseDetails() {
   const [confirmationModal, setConfirmationModal] = useState(null)
   useEffect(() => {
     // Calling fetchCourseDetails fucntion to fetch the details
-    ;(async () => {
+    (async () => {
       try {
         const res = await fetchCourseDetails(courseId)
-        // console.log("course details res: ", res)
+        console.log("course details res: ", res)
         setResponse(res)
       } catch (error) {
         console.log("Could not fetch Course Details")
@@ -152,7 +152,7 @@ function CourseDetails() {
                 <span className="text-yellow-25">{avgReviewCount}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
                 <span>{`(${ratingAndReviews.length} reviews)`}</span>
-                <span>{`${studentsEnroled.length} students enrolled`}</span>
+                {/* <span>{`${studentsEnroled.length} students enrolled`}</span> */}
               </div>
               <div>
                 <p className="">
