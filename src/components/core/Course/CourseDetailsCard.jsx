@@ -72,7 +72,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
           </div>
           <div className="flex flex-col gap-4">
             <button
-              className="bg-yellow-100 text-richblack-800 rounded h-10"
+              className="bg-yellow-100 text-richblack-800 rounded h-10 "
               onClick={
                 user && course?.studentsEnrolled.includes(user?._id)
                   ? () => navigate("/dashboard/enrolled-courses")

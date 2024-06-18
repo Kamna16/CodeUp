@@ -4,6 +4,7 @@ const Section = require("../models/Section")
 const SubSection = require("../models/SubSection")
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const CourseProgress = require("../models/CourseProgress")
 const { convertSecondsToDuration } = require("../utils/secToDuration")
 // Function to create a new course
 exports.createCourse = async (req, res) => {
@@ -204,7 +205,7 @@ exports.getAllCourses = async (req, res) => {
         thumbnail: true,
         instructor: true,
         ratingAndReviews: true,
-        studentsEnroled: true,
+        studentsEnrolled: true,
       }
     )
       .populate("instructor")
@@ -319,12 +320,6 @@ exports.getFullCourseDetails = async (req, res) => {
       })
     }
 
-    // if (courseDetails.status === "Draft") {
-    //   return res.status(403).json({
-    //     success: false,
-    //     message: `Accessing a draft course is forbidden`,
-    //   });
-    // }
 
     let totalDurationInSeconds = 0
     courseDetails.courseContent.forEach((content) => {

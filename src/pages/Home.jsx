@@ -5,6 +5,7 @@ import HighlightText from '../components/core/HomePage/HighlightText'
 
 import CTAButton from "../components/core/HomePage/CTAButton"
 import Banner from "../assets/Images/banner.mp4"
+import ReviewSlider from "../components/common/ReviewSlider"
 import CodeBlocks from "../components/core/HomePage/CodeBlocks"
 import TimelineSection from '../components/core/HomePage/TimelineSection'
 import LearningLanguageSection from '../components/core/HomePage/LearninglanguageSection'
@@ -197,7 +198,7 @@ const Home = () => {
             <InstructorSection />
 
             <h2 className='text-center text-4xl font-semobold mt-10'>review from Other Learners</h2>
-            {/* Review Slider here */}
+            <ReviewSlider/>
             
       </div>
 
