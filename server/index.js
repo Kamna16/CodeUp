@@ -24,7 +24,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
 	cors({
-		origin:"*",
+		origin:"https://codeup-three.vercel.app/",
+		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 		credentials:true,
 	})
 )
