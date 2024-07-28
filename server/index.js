@@ -22,13 +22,26 @@ database.connect();
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
+const allowedOrigins = [
+	'https://codeup-three.vercel.app',
+	'http://localhost:3000'  
+  ];
+
 app.use(
 	cors({
-		origin:"https://codeup-three.vercel.app",
-		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-		credentials:true,
+	  origin: function (origin, callback) {
+		// Allow requests with no origin, like mobile apps or curl requests
+		if (!origin) return callback(null, true);
+		if (allowedOrigins.indexOf(origin) === -1) {
+		  const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+		  return callback(new Error(msg), false);
+		}
+		return callback(null, true);
+	  },
+	  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+	  credentials: true,
 	})
-)
+);
 
 app.use(
 	fileUpload({

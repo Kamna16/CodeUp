@@ -12,19 +12,7 @@ import { useState } from "react";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { ACCOUNT_TYPE } from "../../utils/constants"
 
-// const subLinks = [
-//   {
-//     title: "python",
-//     link: "/catalog/python",
-//   },
-//   {
-//     title: "web dev",
-//     link: "/catalog/web-development",
-//   },
-// ];
-
 const Navbar = () => {
-  // get from slices
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
   const { totalItems } = useSelector((state) => state.cart);
@@ -34,7 +22,7 @@ const Navbar = () => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       setLoading(true)
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
@@ -53,15 +41,19 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700">
+    <div 
+    className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 ${
+      location.pathname !== "/" ? "bg-richblack-800" : ""
+    } transition-all duration-200`}
+    >
       <div className="flex w-11/12 max-w-maxContent items-center justify-between">
-        {/* Image */}
+        {/* logo */}
         <Link to="/">
           <img className="mt-4" src={logo} width={180} height={48} loading='lazy' alt='logo'/>
         </Link>
 
         {/* Nav Links */}
-        <nav>
+        <nav className="hidden md:block">
           <ul className="flex gap-x-6 text-richblack-25">
             {NavbarLinks.map((link, index) => (
               <li key={index}>
