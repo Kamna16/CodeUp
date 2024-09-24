@@ -40,12 +40,12 @@ To get a local copy up and running follow these simple steps.
 2. Start the development server
    ```sh
    npm run dev
-
+   
 ### Contact
-Kamna Bhadoriya 
--[LinkedIn](https://www.linkedin.com/in/kamna-bhadoriya/) 
--kamnabhadoriya042@gmail.com
 
+**Kamna Bhadoriya**  
+- [LinkedIn](https://www.linkedin.com/in/kamna-bhadoriya/)  
+- [Email](mailto:kamnabhadoriya042@gmail.com)
 
 
 
